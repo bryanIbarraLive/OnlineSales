@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title Online Sales</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr") 
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="~/Scripts/myScripts/sidebar.js"></script>
+    <script src="~/Scripts/knockout-3.4.2.debug.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Online Sales", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Team", "Team", "Home")</li>
+                    <li>@Html.ActionLink("Our Products", "ProductsBase", "Products")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+                @*@{Html.RenderAction("Index", "Badge");}*@
+            </div>
+        </div>
+    </div>
+    <div id="wrapper">
+        <div class="overlay"></div>
+           <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+            <ul class="nav sidebar-nav">
+               @*<div data-bind="foreach: types">*@
+              @*  <li><a href="#" class="navbar-brand" data-bind="text: type, click: $parent.productsByType"></a></li>*@
+                <li class="sidebar-nav"> Choose a type!!</li>
+                <li>@Html.ActionLink("Home", "ProductsByType", "Products", new { Type = 5 }, new { @class = "navbar-brand",})</li>
+                <li>@Html.ActionLink("Electronics", "ProductsByType", "Products", new { Type = 3 }, new { @class = "navbar-brand" })</li>
+                <li>@Html.ActionLink("Hardware store", "ProductsByType", "Products", new { Type = 16 }, new { @class = "navbar-brand" })</li>
+                <li>@Html.ActionLink("Cars", "ProductsByType", "Products", new { Type = 19 }, new { @class = "navbar-brand" })</li>
+                <li>@Html.ActionLink("Drugstore", "ProductsByType", "Products", new { Type = 21 }, new { @class = "navbar-brand" })</li>
+                <li>@Html.ActionLink("Sports gear", "ProductsByType", "Products", new { Type = 27 }, new { @class = "navbar-brand" })</li>
+                <li>@Html.ActionLink("School", "ProductsByType", "Products", new { Type = 31 }, new { @class = "navbar-brand" })</li>
+                <li>@Html.ActionLink("Cosmetics", "ProductsByType", "Products", new { Type = 35 }, new { @class = "navbar-brand" })</li>
+                <li>@Html.ActionLink("Personal Care", "ProductsByType", "Products", new { Type = 24 }, new { @class = "navbar-brand" })</li>
+                </div>
+                    </ul>
+        </nav>
+        <div id="page-content-wrapper">
+            <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+                <span class="hamb-top"></span>
+                <span class="hamb-middle"></span>
+                <span class="hamb-bottom"></span>
+            </button>
+            <div class="container body-content">
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - OnlineSales</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+</body>
+</html>

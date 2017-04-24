@@ -1,0 +1,70 @@
+﻿@model OnlineSales.DL.Product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Html.DisplayTextFor(m => m.Name)</h2>
+
+@if (TempData["Added"] != null)
+{
+    <div id="message">
+        <div style="padding: 5px;">
+            <div id="inner-message" class="alert alert-success ">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                @if (Convert.ToInt32(TempData["Added"]) > 1)
+                {
+                    <p>The item was added to your Shopping Cart, you have @TempData["Added"] items like this in your Cart</p>
+                }
+                else
+                {
+                   <p>The item was added to your Shopping Cart</p>
+                }
+            </div>
+        </div>
+    </div>
+}
+
+<table class="table">
+    <tbody>
+        <tr>
+            <td>
+                <img src="~/Images/@Model.Image" width="600" height="600" />
+            </td>
+            <td>
+                <a href="~/ShoppingCart/AddToCart/@Model.ID"><img src="~/Images/AddToCart.jpg" width="150" height="150" /></a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="price">
+                    $@Html.DisplayFor(m => m.Price)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="description">
+                    Description: @Html.DisplayFor(m => m.Description)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Category: @Html.DisplayFor(m => m.Type)
+            </td>
+        </tr>
+    </tbody>
+</table>
+<a href="@ViewBag.LastPage" class="btn btn-default"> Return </a>
+<br />
+@if (ViewBag.Message == true)
+{
+    <script language="JavaScript">
+        alert("No es posible agregar productos al carrito si no está registrado");
+    </script>
+}
+
+
+

@@ -1,0 +1,40 @@
+﻿@model OnlineSales.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    <h4>Change your account settings</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Name:</dt>
+        <dd>
+            @Html.DisplayFor(m => m.Name)
+        </dd>
+        <dt>Last Name:</dt>
+        <dd>
+            @Html.DisplayFor(m => m.LastName)
+        </dd>
+        <dt>Birth Date:</dt>
+        <dd>
+            @Html.DisplayFor(m => m.BirthDate)
+        </dd>
+        <dt>E-mail/User name:</dt>
+        <dd>
+            @Html.DisplayFor(m => m.Email)
+        </dd>
+        <dt>Password:</dt>
+        <dd>
+            @Html.ActionLink("Change your password", "ChangePassword")
+        </dd>
+        <dt>Details:</dt>
+        <dd>
+            @Html.ActionLink("Credit card", "Index", "CreditCard")
+
+        </dd>
+        
+    </dl>
+</div>

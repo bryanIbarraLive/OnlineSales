@@ -1,0 +1,129 @@
+﻿@model OnlineSales.Models.ShoppingCartViewModel
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#myForm").submit(function () {
+                var creditId = $("#listUserCards").val();
+                if (creditId != "") {
+                }
+                else {
+                    alert("You Must Select a Credit Card");
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
+    <script>
+        var modelProducts = @Html.Raw(ViewBag.dataProducts);
+        var modelQuantity = @Html.Raw(ViewBag.dataQuantity);
+    </script>
+    <script src="~/Scripts/myScripts/TestDataScript.js"></script>
+}
+@{
+    if (TempData["Succes"] != null)
+    {
+        <div class="alert alert-success" role="alert"><b>Purchase Succeded!! keep buying</b></div>
+    }
+}
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Buy", "ShoppingCart", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "myForm" }))
+{
+    <h2>My Shopping Cart</h2>
+    <br />
+
+    <table class="table">
+        <tr>
+            <th>
+                Product
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                price per unit
+            </th>
+            <th>
+                Units
+            </th>
+            <th>
+                Final Price
+            </th>
+            <th>Type</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tbody data-bind="foreach: products">
+            <tr>
+                <td>
+                    <img data-bind="attr:{src: imageUrl()}" width="100" height="100" />
+                </td>
+                <td>
+                    <span data-bind="text: Name"></span>
+                </td>
+                <td>
+                    $<span data-bind="text: Price"></span>
+                </td>
+                <td>
+                    <span data-bind="text: Count"></span>
+                </td>
+                <td>
+                    $<span data-bind="text: extPrice().toFixed(2)"></span>
+                </td>
+                <td>
+                    <span data-bind="text: Type"></span>
+                </td>
+                <td>
+                    <button class="btn btn-default" data-bind='click: $parent.deleteFromCart'>Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table">
+        <tr>
+            <td>
+                <div class="form-group" data-bind="template: {name: 'totalsTmpl'}">
+                </div>
+                <script type="text/html" id="totalsTmpl">
+                        <label class="control-label col-md-2">Total:</label>
+                        <label class="control-label col-md-2" data-bind="text: grandTotal().toFixed(2)"></label>
+                </script>
+
+            </td>
+            <td>
+                <div class="form-group">
+                    @{
+                        List<SelectListItem> listItems = new List<SelectListItem>();
+
+                        foreach (var item in Model.listUserCards)
+                        {
+                            SelectListItem sli = new SelectListItem();
+                            sli.Text = item.Number.ToString();
+                            sli.Value = item.ID.ToString();
+                            listItems.Add(sli);
+                        }
+                        @Html.DropDownListFor(m => Model.listUserCards, listItems, "Select a Credit Card", new { @class = "form-control" })
+                    }
+                </div>
+            </td>
+        </tr>
+    </table>
+
+                        if (Model.Products.Count() != 0)
+                        {
+                            <input type="submit" class="btn btn-default" value="Buy" />
+                        }
+                        else
+                        {
+                            <input type="submit" class="btn btn-default" value="Buy" disabled />
+                            }
+
+
+                        }
+
+
