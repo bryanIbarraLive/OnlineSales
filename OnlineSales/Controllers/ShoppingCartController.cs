@@ -24,6 +24,7 @@ namespace OnlineSales
                 listModel.listUserCards = new List<CreditCard>();
                 listModel.ListCarts = new List<CartProduct>();
 
+
                 int custId = ctx.Customers.Where(x => x.E_mail == User.Identity.Name).First().ID;
                 int ShoppingCart = ctx.ShoppingCarts.Where(x => x.CustomerID == custId).First().ID;
                 listModel.ListCarts = ctx.CartProducts.Where(x => x.ShoppingCartID == ShoppingCart).ToList();
