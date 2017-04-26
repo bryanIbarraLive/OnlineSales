@@ -28,7 +28,7 @@
         var
             products = ko.observableArray([]),
 
-            badges = ko.observable(),
+            badges = ko.observable(0),
 
             badge = function () {
                $.ajax({
@@ -37,7 +37,6 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function(data) {
-                        console.log(data);
                         badges(JSON.parse(data.badge));
                     }
                 });
@@ -54,17 +53,19 @@
             deleteFromCart = function (value) {
                 var idToDelete = value.ID();
                 var urlToDelete = "/ShoppingCart/DeleteFromCart/" + idToDelete;
-                $.ajax({
-                    type: "POST",
-                    url: urlToDelete,
-                    success: alert("The item was eliminated")
-                });
                 if (value.Count() > 1) {
                     value.Count(value.Count() - 1);
                 } else {
                     products.remove(value);
                 }
-                badge();
+                $.ajax({
+                    type: "POST",
+                    url: urlToDelete,
+                    success: alert("The item was eliminated")
+                });
+                var temp = badges();
+                temp--;
+                badges(temp);
             },
 
            types = ko.observableArray([]),
@@ -95,8 +96,12 @@
                    type: "POST",
                    url: urlToAdd,
                });
-               badge();
+               var temp = badges();
+               temp++;
+               badges(temp);
+
            },
+
            x = 0,
            loadProducts = function () {
                $.each(modelProducts, function (i, p) {
