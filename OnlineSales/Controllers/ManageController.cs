@@ -400,8 +400,8 @@ namespace OnlineSales.Controllers
     }
     public class Email
     {
-        SmtpClient server = new SmtpClient("smtp.gmail.com", 587);
 
+        SmtpClient server = new SmtpClient("smtp.gmail.com", 587);
         public Email()
         {
             /*
@@ -411,6 +411,7 @@ namespace OnlineSales.Controllers
             * Direccion de Correo (Gmail o Hotmail)
             * y Contrasena correspondiente
             */
+           
             server.Credentials = new System.Net.NetworkCredential("bryan.aig97@gmail.com", "ve9ju8na2");
             server.EnableSsl = true;
         }

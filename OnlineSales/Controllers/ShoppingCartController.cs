@@ -159,6 +159,7 @@ namespace OnlineSales
                         mnsj.From = new MailAddress("OnlineSales@Ventas.com", "Test Correo");
 
                         mnsj.Body = "  Mensaje de Prueba \n\n Enviado desde C#\n\n *VER EL ARCHIVO ADJUNTO*";
+                        mnsj.BodyEncoding = System.Text.Encoding.UTF8 ;
                         /* Enviar */
                         Cr.MandarCorreo(mnsj);
                     }
