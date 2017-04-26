@@ -164,7 +164,8 @@ namespace OnlineSales
                     }
                     catch (Exception e)
                     {
-                        return JavaScript("alert('error al enviar el correo');");
+                        string message = "alert('error al enviar el correo');";
+                        return JavaScript(message);
                     }
                 }
             }
