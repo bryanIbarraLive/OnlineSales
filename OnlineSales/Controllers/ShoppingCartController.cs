@@ -154,7 +154,7 @@ namespace OnlineSales
 
                         mnsj.Subject = "Hola Mundo";
 
-                        mnsj.To.Add(new MailAddress("bryan.ibarra@softtek.com"));
+                        mnsj.To.Add(new MailAddress("jorgeaglr@gmail.com"));
 
                         mnsj.From = new MailAddress("OnlineSales@Ventas.com", "Test Correo");
 
