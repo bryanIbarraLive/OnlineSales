@@ -411,9 +411,11 @@ namespace OnlineSales.Controllers
             * Direccion de Correo (Gmail o Hotmail)
             * y Contrasena correspondiente
             */
-           
-            server.Credentials = new System.Net.NetworkCredential("bryan.aig97@gmail.com", "ve9ju8na2");
             server.EnableSsl = true;
+            server.DeliveryMethod = SmtpDeliveryMethod.Network;
+            server.UseDefaultCredentials = false;
+            server.Credentials = new System.Net.NetworkCredential("bryan.aig97@gmail.com", "ve9ju8na2");
+
         }
 
         public void MandarCorreo(MailMessage mensaje)
