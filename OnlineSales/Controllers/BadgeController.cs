@@ -23,7 +23,6 @@ namespace OnlineSales.Controllers
                 {
                     int ShoppingCart = context.ShoppingCarts.Where(x => x.CustomerID == cust.ID).First().ID;
                     listCarts = context.CartProducts.Where(x => x.ShoppingCartID == ShoppingCart).ToList();
-
                     foreach (CartProduct item in listCarts)
                     {
                         badge += item.Counter;

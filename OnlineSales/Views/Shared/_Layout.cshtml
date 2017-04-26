@@ -41,7 +41,7 @@
             <ul class="nav sidebar-nav">
                @*<div data-bind="foreach: types">*@
               @*  <li><a href="#" class="navbar-brand" data-bind="text: type, click: $parent.productsByType"></a></li>*@
-                <li class="sidebar-nav"> Choose a type!!</li>
+                <li class="navbar-brand"> Choose a type!!</li>
                 <li>@Html.ActionLink("Home", "ProductsByType", "Products", new { Type = 5 }, new { @class = "navbar-brand",})</li>
                 <li>@Html.ActionLink("Electronics", "ProductsByType", "Products", new { Type = 3 }, new { @class = "navbar-brand" })</li>
                 <li>@Html.ActionLink("Hardware store", "ProductsByType", "Products", new { Type = 16 }, new { @class = "navbar-brand" })</li>
