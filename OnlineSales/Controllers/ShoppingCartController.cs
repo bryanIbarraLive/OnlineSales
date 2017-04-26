@@ -8,6 +8,7 @@ using OnlineSales.Models;
 using System.Net;
 using System.Net.Mail;
 using Newtonsoft.Json;
+using OnlineSales.Controllers;
 
 namespace OnlineSales
 {
@@ -145,10 +146,26 @@ namespace OnlineSales
                     //message.Subject = "Compra en OnlineSales";
                     //message.Body = string.Format(body);
                     //message.IsBodyHtml = true;
-                    //using (var smtp = new SmtpClient())
-                    //{
-                    //    smtp.Send(message);
-                    //}
+
+                    try
+                    {
+                        Email Cr = new Email();
+                        MailMessage mnsj = new MailMessage();
+
+                        mnsj.Subject = "Hola Mundo";
+
+                        mnsj.To.Add(new MailAddress("bryan.ibarra@softtek.com"));
+
+                        mnsj.From = new MailAddress("OnlineSales@Ventas.com", "Test Correo");
+
+                        mnsj.Body = "  Mensaje de Prueba \n\n Enviado desde C#\n\n *VER EL ARCHIVO ADJUNTO*";
+                        /* Enviar */
+                        Cr.MandarCorreo(mnsj);
+                    }
+                    catch (Exception e)
+                    {
+                        return JavaScript("alert('error al enviar el correo');");
+                    }
                 }
             }
             return RedirectToAction("Index", "ShoppingCart");

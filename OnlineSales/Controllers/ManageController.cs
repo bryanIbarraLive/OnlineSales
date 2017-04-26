@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using OnlineSales.Models;
 using OnlineSales.DL;
+using System.Net.Mail;
 
 namespace OnlineSales.Controllers
 {
@@ -33,9 +34,9 @@ namespace OnlineSales.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -66,7 +67,7 @@ namespace OnlineSales.Controllers
 
             var userName = User.Identity.Name;
             var model = new RegisterViewModel();
-            using(DBContext ctx = new DBContext())
+            using (DBContext ctx = new DBContext())
             {
                 Customer cust = ctx.Customers.Where(x => x.E_mail == userName).First();
                 model.Name = cust.Name;
@@ -240,7 +241,7 @@ namespace OnlineSales.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                using(DBContext ctx = new DBContext())
+                using (DBContext ctx = new DBContext())
                 {
                     Customer Cust = ctx.Customers.Where(x => x.E_mail == User.Identity.Name).First();
                     Cust.Password = model.NewPassword;
@@ -342,7 +343,9 @@ namespace OnlineSales.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        
+
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -393,6 +396,28 @@ namespace OnlineSales.Controllers
             Error
         }
 
-#endregion
+        #endregion
+    }
+    public class Email
+    {
+        SmtpClient server = new SmtpClient("smtp.gmail.com", 587);
+
+        public Email()
+        {
+            /*
+            * Autenticacion en el Servidor
+            * Utilizaremos nuestra cuenta de correo
+            *
+            * Direccion de Correo (Gmail o Hotmail)
+            * y Contrasena correspondiente
+            */
+            server.Credentials = new System.Net.NetworkCredential("bryan.aig97@gmail.com", "ve9ju8na2");
+            server.EnableSsl = true;
+        }
+
+        public void MandarCorreo(MailMessage mensaje)
+        {
+            server.Send(mensaje);
+        }
     }
 }
