@@ -51,6 +51,9 @@
             },
 
             deleteFromCart = function (value) {
+                var temp = badges();
+                temp--;
+                badges(temp);
                 var idToDelete = value.ID();
                 var urlToDelete = "/ShoppingCart/DeleteFromCart/" + idToDelete;
                 if (value.Count() > 1) {
@@ -63,10 +66,7 @@
                     url: urlToDelete,
                     success: alert("The item was eliminated")
                 });
-                var temp = badges();
-                temp--;
-                badges(temp);
-            },
+                          },
 
            types = ko.observableArray([]),
 
@@ -90,16 +90,15 @@
            },
 
            addToCart = function (value) {
+               var temp = badges();
+               temp++;
+               badges(temp);
                var idToAdd = value.ID();
                var urlToAdd = "/ShoppingCart/AddToCart/" + idToAdd;
                $.ajax({
                    type: "POST",
                    url: urlToAdd,
                });
-               var temp = badges();
-               temp++;
-               badges(temp);
-
            },
 
            x = 0,
